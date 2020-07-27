@@ -16,7 +16,6 @@ public class StartTestApplication  extends SpringBootServletInitializer{
 		return builder.sources(StartTestApplication.class);
 	}
 	public static void main(String[] args) {
-		System.out.println("시작");
 		SpringApplication.run(StartTestApplication.class, args);
 	}
 }
