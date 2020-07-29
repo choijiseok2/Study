@@ -27,6 +27,6 @@ public class ChatController {
 	    
 	    @RequestMapping("/chat")
 	    public String goChat() {
-	       return "index.jsp";
+	       return "chat";
 	    }    
 }
