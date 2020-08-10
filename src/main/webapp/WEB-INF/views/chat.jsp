@@ -20,7 +20,7 @@
             </div>
         </form>
     </div>
-</div>
+</div>jd
 <div id="chat-page" class="hidden">
     <div class="chat-container">
         <div class="chat-header">

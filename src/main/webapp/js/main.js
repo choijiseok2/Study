@@ -21,6 +21,8 @@ function connect(event) {
     if(username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
+        //웹소켓 서버에 접속.
+        //WebSoketConfig의 엔드 포인트 기입.
         var socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
@@ -33,12 +35,13 @@ function onConnected() {
     // 채팅방 설정
     stompClient.subscribe('/topic/public', onMessageReceived);
     // Tell your username to the server
-    // 이름 설정
-    stompClient.send("/app/chat.addUser", {}, JSON.stringify({sender: username,  type: 'JOIN'})
+    // 이름 설정 및 몇몇 필요 파라미터 전송.
+    stompClient.send("/app/chat.addUser", {}, JSON.stringify({ sender: username,  type: 'JOIN' })
     )
     connectingElement.classList.add('hidden');
 }
 
+//웹소켓 서버 연결도중에 뜬 에러
 function onError(error) {
     connectingElement.textContent = 'Could not connect to WebSocket server.  Please refresh this page to try again!';
     connectingElement.style.color = 'red';

@@ -9,5 +9,6 @@ public enum MessageType {
     INFO,
     /** Simple message */
     NONE,
-    LEAVE
+    LEAVE,
+    JOIN
 }
