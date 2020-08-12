@@ -17,16 +17,18 @@ public class ChatController {
 	    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
 	        return chatMessage;
 	    }
-	   
-	    @MessageMapping("/chat.addUser")
+		
+		@MessageMapping("/chat.addUser")
 	    @SendTo("/topic/public")
 	    public ChatMessage addUser(@Payload ChatMessage chatMessage,  SimpMessageHeaderAccessor headerAccessor){
-	        headerAccessor.getSessionAttributes().put("username",  chatMessage.getSender());
+	        headerAccessor.getSessionAttributes().put( "username" ,  chatMessage.getSender() );
 	        return chatMessage;
 	    }
 	    
+	    /*채팅 대기실로 이동하는 컨트롤러*/
 	    @RequestMapping("/chat")
 	    public String goChat() {
 	       return "chat";
-	    }    
+	    }
+	    
 }
