@@ -2,6 +2,7 @@ package com.inittest.vo;
 
 import com.inittest.enums.MessageType;
 
+
 public class ChatMessage {
 
     private MessageType type;
@@ -31,4 +32,10 @@ public class ChatMessage {
     public void setSender(String sender) {
         this.sender = sender;
     }
+
+	@Override
+	public String toString() {
+		return "ChatMessage [type=" + type + ", content=" + content + ", sender=" + sender + "]";
+	}
+    
 }

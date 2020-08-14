@@ -9,10 +9,14 @@ import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import com.inittest.enums.MessageType;
+import com.inittest.service.ChatService;
 import com.inittest.vo.ChatMessage;
 
 @Component
 public class WebSocketEventListener {
+	@Autowired
+	ChatService chatservice;
+	
         private static final org.slf4j.Logger logger =  LoggerFactory.getLogger(WebSocketEventListener.class);
            @Autowired
            private SimpMessageSendingOperations messagingTemplate;
@@ -20,6 +24,8 @@ public class WebSocketEventListener {
            public void handleWebSocketConnectListener(SessionConnectedEvent  event) {
                logger.info("Received a new web socket connection");
            }
+           
+           
            @EventListener
            public void handleWebSocketDisconnectListener(SessionDisconnectEvent  event) {
                StompHeaderAccessor headerAccessor =  StompHeaderAccessor.wrap(event.getMessage());
@@ -29,6 +35,7 @@ public class WebSocketEventListener {
                    ChatMessage chatMessage = new ChatMessage();
                    chatMessage.setType(MessageType.LEAVE);
                    chatMessage.setSender(username);
+                   chatservice.insertChatHis(chatMessage);
                    messagingTemplate.convertAndSend("/topic/public",  chatMessage);
                }
            }

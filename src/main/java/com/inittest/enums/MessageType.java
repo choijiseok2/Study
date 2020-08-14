@@ -10,5 +10,6 @@ public enum MessageType {
     /** Simple message */
     NONE,
     LEAVE,
-    JOIN
+    JOIN,
+    CHAT
 }
