@@ -17,10 +17,14 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="accent username-submit">채팅  시작하기</button>
+                
+                <button type="submit" class="accent username-submit">방 찾아 들어가기</button>
+                
+                <button type="submit" class="accent username-submit">방 만들기</button>
             </div>
         </form>
     </div>
-</div>jd
+</div>
 <div id="chat-page" class="hidden">
     <div class="chat-container">
         <div class="chat-header">
@@ -41,6 +45,8 @@
         </form>
     </div>
 </div>
+
+
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="/js/main.js"></script>

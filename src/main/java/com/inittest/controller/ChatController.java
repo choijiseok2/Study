@@ -13,38 +13,40 @@ import com.inittest.vo.ChatMessage;
 
 @Controller
 public class ChatController {
-	    
+
 	@Autowired
 	ChatService chatservice;
-	
-		@MessageMapping("/chat.sendMessage")
-	    @SendTo("/topic/public")
-	    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-			
-			//대화 내용 기록
-			chatservice.insertChatHis(chatMessage);
-			
-	        return chatMessage;
-	    }
+
+	@MessageMapping("/chat.sendMessage")
+	@SendTo("/topic/public")
+	public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+
+		// 대화 내용 기록
+		chatservice.insertChatHis(chatMessage);
+
+		return chatMessage;
+	}
+
+	@MessageMapping("/chat.addUser")
+	@SendTo("/topic/public")
+	public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+
+		headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+
+		System.out.println(chatMessage.toString());
 		
-		@MessageMapping("/chat.addUser")
-	    @SendTo("/topic/public")
-	    public ChatMessage addUser(@Payload ChatMessage chatMessage,  SimpMessageHeaderAccessor headerAccessor){
+		// 대화 접속 기록
+		chatservice.insertChatHis(chatMessage);
 
-	        headerAccessor.getSessionAttributes().put("username",  chatMessage.getSender());
-	        
-	        System.out.println(chatMessage.toString());
-	        //대화 접속 기록
-	        chatservice.insertChatHis(chatMessage);
+		headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+		return chatMessage;
+	}
 
-	        headerAccessor.getSessionAttributes().put( "username" ,  chatMessage.getSender() );
-	        return chatMessage;
-	    }
-	    
-	    /*채팅 대기실로 이동하는 컨트롤러*/
-	    @RequestMapping("/chat")
-	    public String goChat() {
-	       return "chat";
-	    }
-	    
+	/* 채팅 대기실로 이동하는 컨트롤러 */
+	@RequestMapping("/chat")
+	public String goChat() {
+		return "chat";
+	}
+
 }
+
