@@ -21,26 +21,25 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/file")
 @Slf4j
 public class FileApiController {
-	
-	//파일을 저장할 경로
-	@Value("${temp.path}") private String tempPath;
-	
-	@Autowired private FileService fileService;
-	
 
-	
+	// 파일을 저장할 경로
+	@Value("${temp.path}")
+	private String tempPath;
+
+	@Autowired
+	private FileService fileService;
+
 	@RequestMapping("/upload")
 	public int upload(@RequestPart List<MultipartFile> files) throws IOException {
 		FileVo filevo = new FileVo();
-		log.info("Upload start =>{} " , tempPath);
+		log.info("Upload start =>{} ", tempPath);
 		for (MultipartFile file : files) {
 			Long temptime = System.currentTimeMillis();
-			log.info("Upload file =>{} " , file.getOriginalFilename());
+			log.info("Upload file =>{} ", file.getOriginalFilename());
 			File tmp = new File(tempPath + temptime);
 			filevo.setOriginFileName(file.getOriginalFilename());
 			filevo.setChangeFileName(temptime.toString());
 			fileService.insertFileHis(filevo);
-			
 			try {
 				FileUtils.copyInputStreamToFile(file.getInputStream(), tmp);
 			} catch (IOException e) {
@@ -48,7 +47,6 @@ public class FileApiController {
 				throw e;
 			}
 		}
-	
-	return 1;
+		return 1;
 	}
 }
