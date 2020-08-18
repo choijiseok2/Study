@@ -8,5 +8,7 @@ import com.inittest.vo.FileVo;
 public interface FileMapper {
 
 	void insertFileHis(FileVo filevo);
+
+	FileVo getFileInfo(String filename);
 	
 }

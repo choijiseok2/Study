@@ -10,4 +10,15 @@
 		#{originFileName}
 		)
 	</insert>
+	<select id="getFileInfo" parameterType="String" resultType="com.inittest.vo.FileVo">
+		SELECT 
+			change_file_name,
+			origin_file_name
+		FROM
+			T_FILE
+		WHERE 
+			change_file_name = #{VALUE}
+	</select>
 </mapper>
+
+

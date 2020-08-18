@@ -16,5 +16,12 @@
 	</form>
 </div>
 
+<br><hr>
+	<form action="/file/download" method="post">
+		<input type="text" name="filename">
+		<input type="submit" value="다운받기">
+	
+	</form>
+
 </body>
 </html>

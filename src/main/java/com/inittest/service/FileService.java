@@ -16,4 +16,9 @@ public class FileService {
 		filemapper.insertFileHis(filevo);
 	}
 
+	public FileVo getFileInfo(String filename) {
+		// TODO Auto-generated method stub
+		return filemapper.getFileInfo(filename);
+	}
+
 }
